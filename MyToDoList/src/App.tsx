@@ -78,10 +78,6 @@ export function App() {
             tasksCounter={tasks.length}
             checkedTasksCounter={checkedTasksCounter}
           />
-
-      <Item/>
-
-          <Empty/>
         </div>
       </section>
     </div>

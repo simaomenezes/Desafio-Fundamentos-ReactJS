@@ -1,22 +1,45 @@
 
-import { Trash } from 'phosphor-react'
+import { Trash, Check } from 'phosphor-react'
+
+import { ITask } from '../../App'
 
 import styles from './Item.module.css'
 
-export function Item(){
-    return (
+
+interface Props {
+  data: ITask
+  removeTask: (id:string) => void
+  toogleTaskStatus:({ id, value }: { id: string; value: boolean }) => void
+}
+
+export function Item({ data, removeTask, toogleTaskStatus }: Props){
+
+  function handleTaskToggle(){
+    toogleTaskStatus({ id: data.id, value: !data.isChecked })    
+  }
+
+  function handleRemove() {
+    removeTask(data.id)
+  }
+
+  const checkboxCheckedClassname = data.isChecked ? styles['checkbox-checked'] : styles['checkbox-unchecked']
+  const paragraphCheckedClassname = data.isChecked ? styles['paragraph-checked'] : ''
+
+return (
     <div className={styles.container}>
       <div>
-        <label htmlFor="checkbox">
-          <input readOnly type="checkbox" />
-          <span className={`${styles.checkbox}`}>
+        <label htmlFor="checkbox" onClick={handleTaskToggle}>
+          <input readOnly type="checkbox" checked={data.isChecked} />
+          <span className={`${styles.checkbox} ${checkboxCheckedClassname}`}>
+              {data.isChecked && <Check size={12}/>}
           </span>
 
-          <p className={`${styles.paragraph}`}>
+          <p className={`${styles.paragraph} ${paragraphCheckedClassname}`}>
+            {data.text}
           </p>
         </label>
       </div>
-      <button>
+      <button onClick={handleRemove}>
         <Trash size={16} color="#808080" />
       </button>
     </div>
