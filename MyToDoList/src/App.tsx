@@ -5,6 +5,7 @@ import styles from './App.module.css'
 import { Header } from './components/Header'
 import { Input } from './components/Input'
 import { Button } from './components/Button'
+import { useState } from 'react'
 
 
 export interface ITask {
@@ -15,6 +16,11 @@ export interface ITask {
 
 export function App() {
 
+  // we have two attributs
+  const [inputValue, setInputValue] = useState('')
+
+
+  console.log(inputValue)
   
   
   return (
@@ -24,6 +30,8 @@ export function App() {
       <section className={styles.content}>
         <div className={styles.taskInfoContainer}>
           <Input
+            onChange={(e) => setInputValue(e.target.value)}
+            value={inputValue}
           />
           <Button>
             Criar
