@@ -10,6 +10,7 @@ import { useState } from 'react'
 import { Empty } from './components/List/Empty'
 
 import { Header as ListHeader } from './components/List/Header'
+import { Item } from './components/List/Item'
 
 
 
@@ -25,6 +26,14 @@ export function App() {
   const [inputValue, setInputValue] = useState('')
  
   const [tasks, setTasks] = useState<ITask[]>([])
+
+  const checkedTasksCounter = tasks.reduce((prevValue, currentTask) => {
+    if(currentTask.isChecked){
+      return prevValue + 1
+    }
+
+    return prevValue
+  }, 0)
 
   function handleAddTask(){
     if(!inputValue) return;
@@ -65,7 +74,13 @@ export function App() {
         </div>
         
         <div className={styles.tasksList}>
-          <ListHeader/>
+          <ListHeader
+            tasksCounter={tasks.length}
+            checkedTasksCounter={checkedTasksCounter}
+          />
+
+      <Item/>
+
           <Empty/>
         </div>
       </section>
