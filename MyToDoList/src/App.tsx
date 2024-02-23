@@ -22,15 +22,26 @@ export function App() {
 
   // we have two attributs
   const [inputValue, setInputValue] = useState('')
-  
+ 
+  const [tasks, setTasks] = useState<ITask[]>([])
+
   function handleAddTask(){
     if(!inputValue) return;
 
+    // create our task
     const newTask: ITask = {
       id: uuidv4(),
       text: inputValue,
       isChecked: false,
     }
+
+    // Imutabilidade do estado
+    setTasks((state) => [
+      ...state, newTask
+    ])
+    
+    // set our input empty
+    setInputValue('')
 
     console.log(newTask)
 
