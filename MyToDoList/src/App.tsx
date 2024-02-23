@@ -9,6 +9,7 @@ import { Button } from './components/Button'
 import { useState } from 'react'
 import { Empty } from './components/List/Empty'
 
+import { Header as ListHeader } from './components/List/Header'
 
 
 
@@ -58,12 +59,13 @@ export function App() {
             value={inputValue}
           />
           <Button onClick={handleAddTask}>
-            Criar
+            Create
             <PlusCircle size={16} color="#f2f2f2" weight="bold" />
           </Button>
         </div>
         
         <div className={styles.tasksList}>
+          <ListHeader/>
           <Empty/>
         </div>
       </section>
