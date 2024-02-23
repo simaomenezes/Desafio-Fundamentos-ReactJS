@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid'
 
 import { PlusCircle } from 'phosphor-react'
 
@@ -9,8 +10,10 @@ import { useState } from 'react'
 import { Empty } from './components/List/Empty'
 
 
+
+
 export interface ITask {
-  id: number
+  id: string
   text: string
   isChecked: boolean
 }
@@ -19,11 +22,20 @@ export function App() {
 
   // we have two attributs
   const [inputValue, setInputValue] = useState('')
-
-
-  console.log(inputValue)
   
-  
+  function handleAddTask(){
+    if(!inputValue) return;
+
+    const newTask: ITask = {
+      id: uuidv4(),
+      text: inputValue,
+      isChecked: false,
+    }
+
+    console.log(newTask)
+
+  }
+
   return (
     <div>
       <Header/>
@@ -34,7 +46,7 @@ export function App() {
             onChange={(e) => setInputValue(e.target.value)}
             value={inputValue}
           />
-          <Button>
+          <Button onClick={handleAddTask}>
             Criar
             <PlusCircle size={16} color="#f2f2f2" weight="bold" />
           </Button>
