@@ -8,7 +8,7 @@ import styles from './Item.module.css'
 
 interface Props {
   data: ITask
-  removeTask: (id:string) => void
+  removeTask: (id:string, text: string) => void
   toogleTaskStatus:({ id, value }: { id: string; value: boolean }) => void
 }
 
@@ -19,7 +19,7 @@ export function Item({ data, removeTask, toogleTaskStatus }: Props){
   }
 
   function handleRemove() {
-    removeTask(data.id)
+    removeTask(data.id, data.text)
   }
 
   const checkboxCheckedClassname = data.isChecked ? styles['checkbox-checked'] : styles['checkbox-unchecked']

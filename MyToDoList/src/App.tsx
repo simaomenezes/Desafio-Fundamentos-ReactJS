@@ -54,9 +54,9 @@ export function App() {
     setInputValue('')
   }
 
-  function handleRemoveTask(id: string){
+  function handleRemoveTask(id: string, text: string){
     const filterTask = tasks.filter((task) => task.id !== id)
-    if(!confirm(`Are you whish remove the task? ${id}`)){
+    if(!confirm(`Are you whish remove the task? ${text}`)){
       return
     }
 
