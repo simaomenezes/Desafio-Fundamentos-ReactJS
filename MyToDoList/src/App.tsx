@@ -52,9 +52,27 @@ export function App() {
     
     // set our input empty
     setInputValue('')
+  }
 
-    console.log(newTask)
+  function handleRemoveTask(id: string){
+    const filterTask = tasks.filter((task) => task.id !== id)
+    if(!confirm(`Are you whish remove the task? ${id}`)){
+      return
+    }
 
+    setTasks(filterTask)
+  }
+
+  function handleToggleTask({ id, value }: { id: string; value: boolean }) {
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === id) {
+        return { ...task, isChecked: value }
+      }
+
+      return { ...task }
+    })
+
+    setTasks(updatedTasks)
   }
 
   return (
@@ -78,6 +96,24 @@ export function App() {
             tasksCounter={tasks.length}
             checkedTasksCounter={checkedTasksCounter}
           />
+
+          {
+            tasks.length > 0 ? (
+              <div>
+                {
+                  tasks.map((task) =>(
+                    <Item
+                      key={task.id}
+                      data={task}
+                      removeTask={handleRemoveTask}
+                      toogleTaskStatus={handleToggleTask}
+                    />
+                    )
+                  )
+                }
+            </div>
+            ):(<Empty/>)
+          }
         </div>
       </section>
     </div>
